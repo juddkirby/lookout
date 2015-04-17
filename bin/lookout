@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var _ = require('underscore');
+var http = require('http-request');
+
+var MATCHES_THIS_ROUND = 'http://afl.lookoutdata.com/live/feeds/m/widget/1/default/';
+var MATCHES_TODAY = 'http://afl.lookoutdata.com/live/feeds/m/widget/2/default/';
+
+var teams = {
+  10: 'ADEL',
+  20: 'BRIS',
+  30: 'CARL',
+  40: 'COLL',
+  50: 'ESS',
+  60: 'FRE',
+  70: 'GEEL',
+  80: 'HAW',
+  90: 'MEL',
+  100: 'NMFC',
+  110: 'PORT',
+  120: 'RICH',
+  130: 'STK',
+  140: 'WB',
+  150: 'WCE',
+  160: 'SYD',
+  1000: 'GC',
+  1010: 'GWS'
+};
+
+var LIVE_URL = 'http://afl.lookoutdata.com/live/feeds/m/quickscores/3/default/';
+
+http.get(LIVE_URL, function(error, response) {
+  if(error) {
+
+  } else {
+    var data = JSON.parse(response.buffer.toString());
+    var match = data.c.matches[0].quickScore;
+    console.log('ms(?):          ', match.ms);
+    console.log('Home team score:', match.hs);
+    console.log('Away team score:', match.as);
+    console.log('wt(?):          ', match.wt);
+    console.log('cp(?):          ', match.cp);
+    console.log('tp(?):          ', match.tp);
+    console.log('Time:           ', match.cs);
+    console.log('Formatted Time: ', match.csf);
+    console.log('Key:            ', match.key);
+    console.log('Color:          ', match.cc);
+  }
+});
