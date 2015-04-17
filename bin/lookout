@@ -1,12 +1,30 @@
 #!/usr/bin/env node
 
+// Team Calender
+// http://afl.lookoutdata.com/live/ical/team-{team_id}.ics
+//
+// Pre-match Info
+// http://afl.lookoutdata.com/live/feeds/m/prematch/{api_id}/{match_id}
+//
+// ?
+// http://afl.lookoutdata.com/live/feeds/m/widget/{api_id}/default/
+//
+// Quickscore Summary (including live feed)
+// http://afl.lookoutdata.com/live/feeds/m/quickscores/{api_id}/default/
+//
+// News List
+// http://afl.lookoutdata.com/live/feeds/m/news-list/{api_id}/latest/
+//
+// Player Profile
+// http://afl.lookoutdata.com/live/feeds/m/player-profile/{api_id}/{player_id}/
+//
+// Injuries
+// http://afl.lookoutdata.com/live/feeds/m/injuries/{api_id}/default/
+
 'use strict';
 
 var _ = require('underscore');
 var http = require('http-request');
-
-var MATCHES_THIS_ROUND = 'http://afl.lookoutdata.com/live/feeds/m/widget/1/default/';
-var MATCHES_TODAY = 'http://afl.lookoutdata.com/live/feeds/m/widget/2/default/';
 
 var teams = {
   10: 'ADEL',
@@ -29,9 +47,7 @@ var teams = {
   1010: 'GWS'
 };
 
-var LIVE_URL = 'http://afl.lookoutdata.com/live/feeds/m/quickscores/3/default/';
-
-http.get(LIVE_URL, function(error, response) {
+http.get('http://afl.lookoutdata.com/live/feeds/m/quickscores/3/default/', function(error, response) {
   if(error) {
 
   } else {
